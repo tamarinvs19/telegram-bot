@@ -14,3 +14,11 @@ lazy val main = project.in(file("."))
 scalacOptions ++= Seq (
   "-Ywarn-unused"
 )
+
+inThisBuild(
+  List(
+    scalaVersion := "2.13.5",
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision
+  )
+)
