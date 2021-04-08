@@ -19,4 +19,4 @@ jobs:
     - name: Build and Test
       run: sbt -v -Dfile.encoding=UTF-8 +test
     - name: Scalafix
-      run: scalafixAll --check
+      run: scalafix --check
