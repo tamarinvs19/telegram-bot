@@ -19,4 +19,4 @@ jobs:
     - name: Build and Test
       run: sbt -v -Dfile.encoding=UTF-8 +test
     - name: Scalafix
-      run: sbt "scalafix --check --rules RemoveUnused NoAutoTupling ExplicitResultTypes NoValInForComprehension DisableSyntax ProcedureSyntax LeakingImplicitClassVal"
+      run: sbt "scalafix --check --rules RemoveUnused NoAutoTupling NoValInForComprehension DisableSyntax ProcedureSyntax LeakingImplicitClassVal"
