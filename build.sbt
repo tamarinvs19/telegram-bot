@@ -10,3 +10,7 @@ libraryDependencies ++= Seq(
 )
 
 lazy val main = project.in(file("."))
+
+scalacOptions ++= Seq (
+  "-Ywarn-unused"
+)
