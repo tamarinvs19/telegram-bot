@@ -19,4 +19,4 @@ jobs:
     - name: Build and Test
       run: sbt -v -Dfile.encoding=UTF-8 +test
     - name: Scalafix
-      run: sbt "scalafixAll --rules ProcedureSyntax --check"
+      run: sbt "scalafixAll --rules ProcedureSyntax ExplicitResultTypes --check"
