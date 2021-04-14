@@ -4,7 +4,7 @@ scalaVersion in Global := "2.13.5"
 
 name := "telegram-bot"
 
-libraryDependencies ++= Seq(
+libraryDependencies in Global ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.5" % "test",
   "org.augustjune" %% "canoe" % "0.5.1"
 )
