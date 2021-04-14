@@ -1,7 +1,8 @@
 package org.bot
 
-object main {
+object Main {
   def main(args: Array[String]): Unit = {
     println("Ok, bot starts here!")
   }
+
 }
