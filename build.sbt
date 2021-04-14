@@ -9,8 +9,6 @@ libraryDependencies ++= Seq(
   "org.augustjune" %% "canoe" % "0.5.1"
 )
 
-lazy val main = project.in(file("."))
-
 scalacOptions ++= Seq (
   "-Ywarn-unused"
 )
@@ -22,3 +20,57 @@ inThisBuild(
     semanticdbVersion := scalafixSemanticdb.revision
   )
 )
+
+
+lazy val telegramBotProject = project.in(file("."))
+  .settings(
+    name := "telegram-bot"
+  ).aggregate(
+  dataBaseProject,
+  interfaceProject,
+  receiverProject,
+  userProject,
+  storageClassesProject
+)
+
+
+lazy val dataBaseProject = Project(id = "dataBase", base = file("dataBase"))
+  .settings(
+    name := "dataBase"
+  )
+  .dependsOn(
+    storageClassesProject,
+    userProject
+  )
+
+
+lazy val interfaceProject = Project(id = "interface", base = file("interface"))
+  .settings(
+    name := "interface"
+  )
+  .dependsOn(
+    storageClassesProject,
+    userProject
+  )
+
+
+lazy val receiverProject = Project(id = "receiver", base = file("receiver"))
+  .settings(
+    name := "receiver"
+  )
+  .dependsOn(
+    storageClassesProject
+  )
+
+
+lazy val userProject = Project(id = "user", base = file("user"))
+  .settings(
+    name := "user"
+  )
+
+
+lazy val storageClassesProject = Project(id = "storageClasses", base = file("storageClasses"))
+  .settings(
+    name := "storageClasses"
+  )
+
