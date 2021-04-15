@@ -9,15 +9,14 @@ libraryDependencies in Global ++= Seq(
   "org.augustjune" %% "canoe" % "0.5.1"
 )
 
-scalacOptions ++= Seq (
-  "-Ywarn-unused"
-)
-
 inThisBuild(
   List(
     scalaVersion := "2.13.5",
     semanticdbEnabled := true,
-    semanticdbVersion := scalafixSemanticdb.revision
+    semanticdbVersion := scalafixSemanticdb.revision,
+    scalacOptions ++= Seq (
+      "-Ywarn-unused"
+    )
   )
 )
 
