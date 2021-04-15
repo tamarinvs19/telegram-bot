@@ -15,5 +15,7 @@ case object CalendarRepository extends Repository[Calendar] {
 
 case object EventRepository extends Repository[Event] {
   def deleteOutdatedEvents(): Nothing = ???
+}
 
+case object UserRepository extends Repository[User] {
 }
