@@ -1,3 +1,3 @@
 package org.bot
 
-case class User(emknId: Id, name: String)
+case class User(emknId: ID, name: String)
