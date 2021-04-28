@@ -1,6 +1,6 @@
 package org
 
 package object bot {
-  final class Id(val v: Int) extends AnyVal
-  final class URL(val v: String) extends AnyVal
+  final case class Id(v: Int) extends AnyVal
+  final case class URL(v: String) extends AnyVal
 }
