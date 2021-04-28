@@ -1,4 +1,4 @@
-package org.bot.Repositories
+package org.bot.traits
 
 import org.bot.User
 
