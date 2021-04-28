@@ -7,4 +7,5 @@ trait Repository[F[_], Id, Data] {
   def exists(id: Id): F[Boolean]
   def remove(id: Id): F[Either[String, Unit]]
   def update(id: Id, data: Data): F[Unit]
+  def filter(f: Data => Boolean): F[List[Data]]
 }

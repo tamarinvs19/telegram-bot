@@ -6,7 +6,7 @@ case class Event(
                   emknId: ID,
                   description: String,
                   sourceType: SourceType,
-                  lastModificationTime: DateTime,
-                  deadline: DateTime,
+                  creationDate: DateTime,
+                  deadlineDate: DateTime,
                   link: URL
                 )
