@@ -25,8 +25,8 @@ class ConcurrentHashMapRepository[T: HavingId] extends Repository[Id, ID, T]{
 
   override def remove(id: ID): Id[Either[String, Unit]] =
     hashMap.remove(id) match {
-      case false => Left("No object with id = $id")
-      case true  => Right()
+      case null => Left("No object with id = $id")
+      case _  => Right()
     }
 
   override def update(id: ID, data: T): Id[Unit] = hashMap.replace(id, data)
