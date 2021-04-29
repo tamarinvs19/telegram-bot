@@ -11,5 +11,6 @@ object Main {
   def main(args: Array[String]): Unit = {
     val user = User(ID(1), "Student")
     users.save(user)
+    println(users.getAll)
   }
 }
