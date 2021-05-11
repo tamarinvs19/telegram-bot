@@ -1,16 +1,18 @@
 package org.bot
 
+import cats.Eval
 import org.bot.ConcurrentHashMap.ConcurrentHashMapRepository
-import org.bot.ConcurrentHashMap.IdImplicits.{calendarId, eventId, userId}
+
+
 
 object Main {
-  val users = new ConcurrentHashMapRepository[User]
-  val calendars = new ConcurrentHashMapRepository[Calendar]
-  val events = new ConcurrentHashMapRepository[Event]
+  val users = new ConcurrentHashMapRepository[Eval, User]
+  val calendars = new ConcurrentHashMapRepository[Eval, Calendar]
+  val events = new ConcurrentHashMapRepository[Eval, Event]
 
   def main(args: Array[String]): Unit = {
     val user = User(ID(1), "Student")
     users.save(user)
-    println(users.getAll)
+    println(users.getAll.value)
   }
 }
