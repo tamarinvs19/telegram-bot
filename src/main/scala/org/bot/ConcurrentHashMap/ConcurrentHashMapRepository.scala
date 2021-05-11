@@ -1,35 +1,46 @@
 package org.bot.ConcurrentHashMap
 
-import cats.Id
+import cats.effect.Sync
 import org.bot.ID
-import org.bot.storage.HavingId
 import org.bot.traits.Repository
 
 import java.util.concurrent.ConcurrentHashMap
-import scala.jdk.CollectionConverters.{CollectionHasAsScala, SetHasAsScala}
+import scala.jdk.CollectionConverters.CollectionHasAsScala
 
-class ConcurrentHashMapRepository[T: HavingId] extends Repository[Id, ID, T]{
+class ConcurrentHashMapRepository[F[_]: Sync, T: HavingId] extends Repository[F, ID, T]{
   val hashMap: ConcurrentHashMap[ID, T] = new ConcurrentHashMap[ID, T]()
 
-  override def retrieve(id: ID): Id[Either[String, T]] =
+  override def retrieve(id: ID): F[Either[String, T]] = Sync[F].delay(
     hashMap.get(id) match {
       case null  => Left("No objects with id = $id")
       case other => Right(other)
     }
+  )
 
-  override def getAll: Id[List[(ID, T)]] = hashMap.entrySet().asScala.toList.map(m => (m.getKey, m.getValue))
+  override def getAll: F[List[(ID, T)]] = Sync[F].delay(
+    hashMap.entrySet().asScala.toList.map(m => (m.getKey, m.getValue))
+  )
 
-  override def save(data: T): Id[Unit] = hashMap.put(implicitly[HavingId[T]].id(data), data)
+  override def save(data: T): F[Unit] = Sync[F].delay(
+    hashMap.put(implicitly[HavingId[T]].id(data), data)
+  )
 
-  override def exists(id: ID): Id[Boolean] = hashMap.containsKey(id)
+  override def exists(id: ID): F[Boolean] = Sync[F].delay(
+    hashMap.containsKey(id)
+  )
 
-  override def remove(id: ID): Id[Either[String, Unit]] =
+  override def remove(id: ID): F[Either[String, Unit]] = Sync[F].delay(
     hashMap.remove(id) match {
       case null => Left("No object with id = $id")
-      case _  => Right()
+      case _    => Right()
     }
+  )
 
-  override def update(id: ID, data: T): Id[Unit] = hashMap.replace(id, data)
+  override def update(id: ID, data: T): F[Unit] = Sync[F].delay(
+    hashMap.replace(id, data)
+  )
 
-  override def filter(f: T => Boolean): Id[List[T]] = hashMap.values().asScala.toList.filter(f)
+  override def filter(f: T => Boolean): F[List[T]] = Sync[F].delay(
+    hashMap.values().asScala.toList.filter(f)
+  )
 }
