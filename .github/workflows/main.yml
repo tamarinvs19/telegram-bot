@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Create TG_TOKEN
-      run: ././github/scripts/create_token.sh
+      run: ./.github/scripts/create_token.sh
       env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
     - name: Setup Scala
@@ -24,10 +24,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Create TG_TOKEN
-      run: ././github/scripts/create_token.sh
-      env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
     - name: Setup Scala
       uses: olafurpg/setup-scala@v10
       with:
