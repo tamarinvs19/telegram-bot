@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "$TG_TOKEN" > TG_TOKEN
+echo "$TG_TOKEN\c" > TG_TOKEN echo
