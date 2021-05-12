@@ -4,21 +4,20 @@ scalaVersion in Global := "2.13.5"
 
 name := "telegram-bot"
 
-libraryDependencies ++= Seq(
+libraryDependencies in Global ++= Seq(
+  "org.typelevel" %% "cats-effect" % "3.1.0",
   "org.scalatest" %% "scalatest" % "3.2.8" % "test",
-  "org.augustjune" %% "canoe" % "0.5.1"
-)
-
-lazy val main = project.in(file("."))
-
-scalacOptions ++= Seq (
-  "-Ywarn-unused"
+  "com.github.nscala-time" %% "nscala-time" % "2.26.0"
 )
 
 inThisBuild(
   List(
-    scalaVersion := "2.13.5",
     semanticdbEnabled := true,
-    semanticdbVersion := scalafixSemanticdb.revision
+    semanticdbVersion := scalafixSemanticdb.revision,
+    scalacOptions ++= Seq (
+      "-Ywarn-unused"
+    )
   )
 )
+
+lazy val main = project.in(file("."))
