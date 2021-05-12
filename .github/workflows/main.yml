@@ -8,7 +8,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name Create TG_TOKEN
+    - name: Create TG_TOKEN
       run: ./github/scripts/create_token.sh
       env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name Create TG_TOKEN
+    - name: Create TG_TOKEN
       run: ./github/scripts/create_token.sh
       env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
