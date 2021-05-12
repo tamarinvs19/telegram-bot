@@ -12,7 +12,8 @@ import java.io.FileInputStream
 
 class Telegram {
 
-  val token: String = new String(new FileInputStream("TG_TOKEN").readAllBytes())
+  val token: String = scala.util.Properties.envOrElse(
+    "TG_TOKEN", new String(new FileInputStream("TG_TOKEN").readAllBytes()))
 
   class MyTGBot(implicit val backend: SttpBackend[IO, Any])
     extends TelegramBot[IO](token, backend)
