@@ -1,17 +1,17 @@
 package org.bot
 
-import cats.Eval
 import org.bot.ConcurrentHashMap.ConcurrentHashMapRepository
+import org.bot.Telegram.Telegram
+import cats.effect.IO
 
 
 object Main {
-  val users = new ConcurrentHashMapRepository[Eval, User]
-  val calendars = new ConcurrentHashMapRepository[Eval, Calendar]
-  val events = new ConcurrentHashMapRepository[Eval, Event]
+  val users = new ConcurrentHashMapRepository[IO, User]
+  val calendars = new ConcurrentHashMapRepository[IO, Calendar]
+  val events = new ConcurrentHashMapRepository[IO, Event]
 
   def main(args: Array[String]): Unit = {
-    val user = User(ID(1), "Student")
-    users.save(user).value
-    println(users.getAll.value)
+    val tg = new Telegram
+    tg.runBot()
   }
 }
