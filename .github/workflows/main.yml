@@ -8,13 +8,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Setup Scala 
+    - name Create TG_TOKEN
+      run: ./github/scripts/create_token.sh
+      env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+    - name: Setup Scala
       uses: olafurpg/setup-scala@v10
       with:
         java-version: "adopt@1.8"
     - name: Build and Test
-      env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
       run: sbt -v -Dfile.encoding=UTF-8 +test
 
   Scalafix:
@@ -22,12 +24,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Setup Scala 
+    - name Create TG_TOKEN
+      run: ./github/scripts/create_token.sh
+      env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+    - name: Setup Scala
       uses: olafurpg/setup-scala@v10
       with:
         java-version: "adopt@1.8"
     - name: Scalafix
-      env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
       run: sbt "scalafix --check --rules RemoveUnused NoAutoTupling NoValInForComprehension DisableSyntax ProcedureSyntax LeakingImplicitClassVal"
 

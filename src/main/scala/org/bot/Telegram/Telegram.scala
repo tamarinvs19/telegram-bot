@@ -4,16 +4,14 @@ import cats.effect.IO
 import cats.effect.unsafe.implicits.global
 import com.bot4s.telegram.api.declarative.Commands
 import com.bot4s.telegram.cats.{Polling, TelegramBot}
-import org.bot.traits.Repository
+import sttp.client3.SttpBackend
 import sttp.client3.asynchttpclient.cats.AsyncHttpClientCatsBackend
-import sttp.client3.{SttpBackend, UriContext, basicRequest}
 
 import java.io.FileInputStream
 
 class Telegram {
 
-  val token: String = scala.util.Properties.envOrElse(
-    "TG_TOKEN", new String(new FileInputStream("TG_TOKEN").readAllBytes()))
+  val token: String = new String(new FileInputStream("TG_TOKEN").readAllBytes())
 
   class MyTGBot(implicit val backend: SttpBackend[IO, Any])
     extends TelegramBot[IO](token, backend)
