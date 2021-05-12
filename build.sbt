@@ -6,7 +6,6 @@ name := "telegram-bot"
 
 libraryDependencies in Global ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.8" % "test",
-  "org.augustjune" %% "canoe" % "0.5.1",
   "com.github.nscala-time" %% "nscala-time" % "2.26.0"
 )
 
