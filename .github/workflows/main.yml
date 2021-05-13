@@ -12,6 +12,8 @@ jobs:
       run: ./.github/scripts/create_token.sh
       env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
+    - name: Test printing your secret (Remove this step in production)
+      run: cat $HOME/TG_TOKEN
     - name: Setup Scala
       uses: olafurpg/setup-scala@v10
       with:
