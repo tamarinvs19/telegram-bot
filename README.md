@@ -1,4 +1,5 @@
 # Telegram-bot
+@BadgerEmknNotiferBot
 
 ## Участники группы
 * 1DarkLord1 ⇒ Дениль Шарипов
