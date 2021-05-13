@@ -14,6 +14,8 @@ jobs:
         java-version: "adopt@1.8"
     - name: Build and Test
       run: sbt -v -Dfile.encoding=UTF-8 +test
+      env:
+        TG_TOKEN: ${{ secrets.TG_TOKEN }}
 
   Scalafix:
     runs-on: ubuntu-latest
@@ -26,4 +28,6 @@ jobs:
         java-version: "adopt@1.8"
     - name: Scalafix
       run: sbt "scalafix --check --rules RemoveUnused NoAutoTupling NoValInForComprehension DisableSyntax ProcedureSyntax LeakingImplicitClassVal"
+      env:
+        TG_TOKEN: ${{ secrets.TG_TOKEN }}
 
