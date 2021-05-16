@@ -7,7 +7,7 @@ name := "telegram-bot"
 libraryDependencies in Global ++= Seq(
   "org.typelevel" %% "cats-effect" % "3.1.0",
   "org.scalatest" %% "scalatest" % "3.2.8" % "test",
-  "com.github.nscala-time" %% "nscala-time" % "2.26.0"
+  "com.github.nscala-time" %% "nscala-time" % "2.28.0"
 )
 
 inThisBuild(
