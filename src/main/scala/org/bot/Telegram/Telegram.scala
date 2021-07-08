@@ -1,7 +1,6 @@
 package org.bot.Telegram
 
-import cats.{Defer, Monad}
-import cats.effect.{Concurrent, IO}
+import cats.effect.IO
 import cats.implicits.catsSyntaxApplicativeId
 import com.bot4s.telegram.api.declarative.Commands
 import com.bot4s.telegram.cats.{Polling, TelegramBot}
@@ -38,17 +37,18 @@ class Telegram(implicit val context: Context[IO]) {
           for {
             status <- responseMessage
             alreadyExists <- context.users.exists(ID(emknId))
-            val message = (status, alreadyExists) match {
+            message = (status, alreadyExists) match {
               case ("OK", true) => "This user already exists"
-              case ("OK", false) => "OK"
+              case ("OK", false) => {
+                val newUser = new User(ID(emknId), "Random")
+                println("-----------------------------------------------------------")
+                context.users.save(newUser)
+                "OK"
+              }
               case (other, _) => other
             }
             _ <- reply(message)
           } yield {
-            if (status == "OK" && !alreadyExists) {
-              val newUser = new User(ID(emknId), "Random")
-              context.users.save(newUser)
-            }
             temFile.delete()
           }
         }

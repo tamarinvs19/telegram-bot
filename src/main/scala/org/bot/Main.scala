@@ -10,6 +10,10 @@ object Main extends IOApp {
   val users = new ConcurrentHashMapRepository[IO, User]
   val calendars = new ConcurrentHashMapRepository[IO, Calendar]
   val events = new ConcurrentHashMapRepository[IO, Event]
+
+  val user = new User(ID(150), "150")
+  users.save(user).void
+
   implicit val context: Context[IO] = Context(users, events, calendars)
 
   override def run(args: List[String]): IO[ExitCode] = {
